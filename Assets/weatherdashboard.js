@@ -108,7 +108,6 @@ function itemSearch(queryString) {
     let currentDescription = $("<h3>").text(
       response.list[0].weather[0].description
     );
-    console.log(response);
     let today = new Date();
     let currentTime = today.getHours();
     if (0 < currentTime < 2) {
@@ -246,7 +245,7 @@ function itemSearch(queryString) {
     resultFive.attr("class", "col-3 forecast-day flex");
     let iconFive = $("<img>").attr(
       "src",
-      "http://openweathermap.org/img/wn/" +
+      "https://openweathermap.org/img/wn/" +
         response.list[36].weather[0].icon +
         "@2x.png"
     );
