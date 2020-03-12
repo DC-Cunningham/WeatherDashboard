@@ -2,7 +2,7 @@ var searchHistory = [];
 var lastSearch = [];
 var lastSearchLat;
 var lastSearchLon;
-var days = [
+const days = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -10,6 +10,53 @@ var days = [
   "Thursday",
   "Friday",
   "Saturday"
+];
+const dates = [
+  "1st",
+  "2nd",
+  "3rd",
+  "4th",
+  "5th",
+  "6th",
+  "7th",
+  "8th",
+  "9th",
+  "10th",
+  "11th",
+  "12th",
+  "13th",
+  "14th",
+  "15th",
+  "16th",
+  "17th",
+  "18th",
+  "19th",
+  "20th",
+  "21st",
+  "22nd",
+  "23rd",
+  "24th",
+  "25th",
+  "26th",
+  "27th",
+  "28th",
+  "29th",
+  "30th",
+  "31st"
+];
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
 ];
 
 $("#search-form").on("submit", function(event) {
@@ -100,7 +147,15 @@ function itemSearch(queryString) {
     let currentDayTemps = temps.slice(0, 8);
     let minTemp = Math.min(...currentDayTemps) - 273.15;
     let maxTemp = Math.max(...currentDayTemps) - 273.15;
-    resultOne.append($("<h4>").text("Today"));
+    resultOne.append(
+      $("<h4>").text(
+        days[today.getDay()] +
+          " the " +
+          dates[today.getDate()] +
+          " of " +
+          months[today.getMonth()]
+      )
+    );
     resultOne.append(city);
     resultOne.append(icon);
     resultOne.append(currentDescription);

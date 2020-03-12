@@ -19,7 +19,19 @@
 
 .forecast-day {
   float: left;
-  border-style: solid;
+  padding: 10px;
+  outline: 2px solid black;
+  outline-style: groove;
+  outline-offset: -10px;
+}
+
+#currentBlock,
+#search-form {
+  padding: 10px;
+  outline: 2px solid black;
+  outline-style: groove;
+  outline-offset: -10px;
+  /* border-style: solid;
   border-radius: 5px;
-  border-color: black;
+  border-color: black; */
 }
