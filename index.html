@@ -7,7 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"
     />
-    <script rel="stylesheet" src="Assets/style.css"></script>
+    <link rel="stylesheet" href="Assets/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script src="https://unpkg.com/rough-viz@1.0.4"></script> -->
 
@@ -16,29 +16,26 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-4">Weather Dashboard</h1>
-        <p class="lead">Find out what the weather is going to be all around the world!</p>
-        <hr class="my-4">
-        <form class="row" id="search-form">
-            <div class="form-group col-md-4 mx-sm-3 mb-2">
-                <label class="sr-only">Password</label>
-                <input type="text" class="form-control" id="searchFormInput" placeholder="Search for a city's weather">
-              </div>
-              <button type="submit" class="col-md-2 btn btn-primary mb-2" id= "searchButton">Search</button>
-              <p>To make a more precise search put the city's name, then a comma, and then a 2-letter country code <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="blank">ISO3166</a>. You will get all cities in the chosen country.
-                The order is important - first the city name, and then a comma, then the country letters. Example - London, GB or New York, US.</p>
-            </form>
+        <p class="lead">Find out what the weather is going to be all around the world!</p> 
     </div>
       <div class="row">
-        <div class="col-3">
-            <h2>Search History:</h2>
-            <div id="search-history">
-              
+        <div class="col-4 border rounded" id="search-form">
+          <form class="row">
+            <div class="col-12 form-group">
+                <input type="text" class="form-control" id="searchFormInput" placeholder="Search for a city's weather">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="searchButton">Search</button>
+              <p class="col-10" id="note">Note: To make a more precise search put the city's name, then a comma, and then a 2-letter country code <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="blank">ISO3166</a>. You will get all cities in the chosen country.
+                The order is important - first the city name, and then a comma, then the country letters. Example - London, GB or New York, US.</p>
+          </form>
+        <div class="row">
+          <h2 class="col-12 text-center">Search History:</h2>
+            <div class="col-12" id="search-history">
             </div>
             <button class="btn btn-outline-danger btn-block" id="clear-history">clear history</button>
         </div>
-        <div class="col-9" id= "forecastBlock">
-            
-        </div>
+      </div>
+      <div class="col-8 border rounded text-center" id= "forecastBlock"> 
       </div>
     <script rel=text/javascript src = "Assets/weatherdashboard.js"></script>
 </body>

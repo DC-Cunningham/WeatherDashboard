@@ -1,3 +1,26 @@
-#clear-history .btn-block {
+.jumbotron {
+  margin-bottom: 0em;
+  padding-bottom: 0em;
+}
+
+#note {
+  width: 80%;
+  margin: 0 auto;
+  font-size: x-small;
+}
+
+.btn,
+#searchFormInput,
+#searchButton {
+  margin: 0 auto;
+  margin-top: 10px;
   width: 80%;
 }
+/* 
+#search-form,
+#forecastBlock {
+  border-style: solid;
+  border-radius: 0.5em;
+  padding: 10px;
+  margin: 1px;
+} */

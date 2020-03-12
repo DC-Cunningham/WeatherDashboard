@@ -1,4 +1,7 @@
 var searchHistory = [];
+var lastSearch = [];
+var lastSearchLat;
+var lastSearchLon;
 
 $("#search-form").on("submit", function(event) {
   event.preventDefault();
@@ -7,6 +10,23 @@ $("#search-form").on("submit", function(event) {
     .trim();
   itemSearch(queryString(queryParameter));
 });
+
+function UVSearch(queryStringUV) {
+  $.ajax({
+    url: queryStringUV,
+    method: "GET"
+  }).then(function(response) {
+    let UVindex = $("<h4>").text("UV Index: " + response.value);
+    if (response.value > 7) {
+      UVindex.attr("class", "bg-danger text-white");
+    } else if (response.value > 2 && response.value < 7) {
+      UVindex.attr("class", "bg-warning text-dark");
+    } else {
+      UVindex.attr("class", "bg-success text-white");
+    }
+    $("#forecastBlock").append(UVindex);
+  });
+}
 //get the search terms from the input, store in variable
 function itemSearch(queryString) {
   $("#forecastBlock").empty();
@@ -30,6 +50,7 @@ function itemSearch(queryString) {
     let currentDescription = $("<h3>").text(
       response.list[0].weather[0].description
     );
+    console.log(response);
     let today = new Date();
     let currentTime = today.getHours();
     if (0 < currentTime < 2) {
@@ -87,15 +108,19 @@ function itemSearch(queryString) {
       )
     );
     $("#forecastBlock").append(result);
-    var searchTerm = response.city.name + "," + response.city.country;
+    searchTerm = response.city.name + "," + response.city.country;
 
     appendHistory();
     function appendHistory() {
-      let searchTerm = response.city.name + "," + response.city.country;
       if (searchHistory.includes(searchTerm) === false) {
         searchHistory.push(searchTerm);
       }
+      lastSearch = searchTerm;
+      lastSearchLat = response.city.coord.lat;
+      lastSearchLon = response.city.coord.lon;
     }
+    UVSearch(queryStringUV(lastSearchLat, lastSearchLon));
+    console.log(queryStringUV(lastSearchLat, lastSearchLon));
     renderHistory();
   });
 }
@@ -136,6 +161,20 @@ function queryString(queryParameter) {
   queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=";
   const appID = "fc90701830b39a5a74f0509b12344c7c";
   return queryURL + queryParameter + "&appid=" + appID;
+}
+
+function queryStringUV(lastSearchLat, lastSearchLon) {
+  queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?";
+  const appID = "fc90701830b39a5a74f0509b12344c7c";
+  return (
+    queryURLUV +
+    "lat=" +
+    lastSearchLat +
+    "&lon=" +
+    lastSearchLon +
+    "&appid=" +
+    appID
+  );
 }
 
 $("#clear-history").on("click", function(event) {
