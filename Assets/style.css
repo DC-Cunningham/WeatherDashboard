@@ -27,6 +27,7 @@
 
 #currentBlock,
 #search-form {
+  min-height: 400px;
   padding: 10px;
   outline: 2px solid black;
   outline-style: groove;
