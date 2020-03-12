@@ -1,3 +1,4 @@
+debugger;
 var searchHistory = [];
 var lastSearch = [];
 var lastSearchLat;
@@ -101,7 +102,7 @@ function itemSearch(queryString) {
     let city = $("<h2>").text(searchTerm);
     let icon = $("<img>").attr(
       "src",
-      "http://openweathermap.org/img/wn/" +
+      "https://openweathermap.org/img/wn/" +
         response.list[0].weather[0].icon +
         "@2x.png"
     );
@@ -182,7 +183,7 @@ function itemSearch(queryString) {
     resultTwo.attr("class", "col-3 forecast-day flex");
     let iconTwo = $("<img>").attr(
       "src",
-      "http://openweathermap.org/img/wn/" +
+      "https://openweathermap.org/img/wn/" +
         response.list[13].weather[0].icon +
         "@2x.png"
     );
@@ -202,7 +203,7 @@ function itemSearch(queryString) {
     resultThree.attr("class", "col-3 forecast-day flex");
     let iconThree = $("<img>").attr(
       "src",
-      "http://openweathermap.org/img/wn/" +
+      "https://openweathermap.org/img/wn/" +
         response.list[22].weather[0].icon +
         "@2x.png"
     );
@@ -226,7 +227,7 @@ function itemSearch(queryString) {
     resultFour.attr("class", "col-3 forecast-day flex");
     let iconFour = $("<img>").attr(
       "src",
-      "http://openweathermap.org/img/wn/" +
+      "https://openweathermap.org/img/wn/" +
         response.list[28].weather[0].icon +
         "@2x.png"
     );
@@ -269,7 +270,7 @@ function itemSearch(queryString) {
 
     appendHistory();
     function appendHistory() {
-      if (searchHistory.includes(searchTerm) === false) {
+      if (searchHistory.includes(searchTerm) == false) {
         searchHistory.push(searchTerm);
       }
       lastSearch = searchTerm;
@@ -289,12 +290,13 @@ $("#search-history").on("click", function(event) {
 
 function renderHistory() {
   $("#search-history").empty();
-  searchHistory.forEach(search);
-  function search(item, index) {
-    let button = $("<button>").text(searchHistory[index]);
-    button.attr("value", searchHistory[index]);
-    button.attr("class", "btn btn-light btn-block");
-    $("#search-history").prepend(button);
+  if (searchHistory && searchHistory.length !== 0) {
+    searchHistory.forEach(function(item, index) {
+      let button = $("<button>").text(searchHistory[index]);
+      button.attr("value", searchHistory[index]);
+      button.attr("class", "btn btn-light btn-block");
+      $("#search-history").prepend(button);
+    });
   }
   renderClearBtn();
   storeHistory();
@@ -302,13 +304,17 @@ function renderHistory() {
 
 function displaySearchHistory() {
   let searchHistoryList = JSON.parse(localStorage.getItem("search-history"));
-  if (searchHistoryList !== []) {
+  if (searchHistoryList !== null) {
     searchHistory = searchHistoryList;
+  } else {
+    searchHistory = [];
   }
   let lastSearchHistory = JSON.parse(localStorage.getItem("last-search"));
-  if (lastSearchHistory !== []) {
+  if (lastSearchHistory !== null) {
     lastSearch = lastSearchHistory;
     itemSearch(queryString(lastSearch));
+  } else {
+    lastSearch = [];
   }
   renderHistory();
 }
@@ -320,13 +326,13 @@ function storeHistory() {
 }
 
 function queryString(queryParameter) {
-  queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=";
+  queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=";
   const appID = "fc90701830b39a5a74f0509b12344c7c";
   return queryURL + queryParameter + "&appid=" + appID;
 }
 
 function queryStringUV(lastSearchLat, lastSearchLon) {
-  queryURLUV = "http://api.openweathermap.org/data/2.5/uvi?";
+  queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?";
   const appID = "fc90701830b39a5a74f0509b12344c7c";
   return (
     queryURLUV +
@@ -343,6 +349,7 @@ $("#clear-history").on("click", function(event) {
   event.preventDefault();
   window.localStorage.clear();
   searchHistory = [];
+  lastSearch = [];
   renderHistory();
 });
 
