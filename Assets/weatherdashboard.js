@@ -2,6 +2,15 @@ var searchHistory = [];
 var lastSearch = [];
 var lastSearchLat;
 var lastSearchLon;
+var days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
 
 $("#search-form").on("submit", function(event) {
   event.preventDefault();
@@ -24,23 +33,25 @@ function UVSearch(queryStringUV) {
     } else {
       UVindex.attr("class", "bg-success text-white");
     }
-    $("#forecastBlock").append(UVindex);
+    $("#currentBlock").append(UVindex);
   });
 }
 //get the search terms from the input, store in variable
 function itemSearch(queryString) {
+  $("#currentBlock").empty();
   $("#forecastBlock").empty();
   $.ajax({
     url: queryString,
     method: "GET"
   }).then(function(response) {
+    searchTerm = response.city.name + "," + response.city.country;
     let temperatures = response.list;
     let temps = [];
     temperatures.forEach(function(item, index) {
       temps.push(item.main.temp);
     });
-    let result = $("<div>");
-    let city = $("<h2>").text(response.city.name + "," + response.city.country);
+    let resultOne = $("<div>");
+    let city = $("<h2>").text(searchTerm);
     let icon = $("<img>").attr(
       "src",
       "http://openweathermap.org/img/wn/" +
@@ -89,26 +100,117 @@ function itemSearch(queryString) {
     let currentDayTemps = temps.slice(0, 8);
     let minTemp = Math.min(...currentDayTemps) - 273.15;
     let maxTemp = Math.max(...currentDayTemps) - 273.15;
-    result.append(city);
-    result.append(icon);
-    result.append(currentDescription);
-    result.append(
+    resultOne.append($("<h4>").text("Today"));
+    resultOne.append(city);
+    resultOne.append(icon);
+    resultOne.append(currentDescription);
+    resultOne.append(
       $("<h4>").text("Current Temperature: " + currentTemp.toFixed(2) + "°C")
     );
-    result.append(
+    resultOne.append(
       $("<h4>").text("Minimum Temperature: " + minTemp.toFixed(2) + "°C")
     );
-    result.append(
+    resultOne.append(
       $("<h4>").text("Maximum Temperature: " + maxTemp.toFixed(2) + "°C")
     );
-    result.append($("<h4>").text("Current Humidity: " + currentHumidity + "%"));
-    result.append(
+    resultOne.append(
+      $("<h4>").text("Current Humidity: " + currentHumidity + "%")
+    );
+    resultOne.append(
       $("<h4>").text(
         "Current Windspeed: " + currentWindSpeed.toFixed(2) + "km/h"
       )
     );
-    $("#forecastBlock").append(result);
-    searchTerm = response.city.name + "," + response.city.country;
+    $("#currentBlock").append(resultOne);
+
+    let resultTwo = $("<div>");
+    resultTwo.attr("class", "col-3 forecast-day flex");
+    let iconTwo = $("<img>").attr(
+      "src",
+      "http://openweathermap.org/img/wn/" +
+        response.list[13].weather[0].icon +
+        "@2x.png"
+    );
+    let dayTwoTemps = temps.slice(8, 16);
+    let minTempTwo = Math.min(...dayTwoTemps) - 273.15;
+    let maxTempTwo = Math.max(...dayTwoTemps) - 273.15;
+    if (today.getDay() <= 5) {
+      resultTwo.append($("<h4>").text(days[today.getDay() + 1]));
+    } else {
+      resultTwo.append($("<h4>").text(days[today.getDay() - 6]));
+    }
+    resultTwo.append(iconTwo);
+    resultTwo.append($("<h4>").text("Min: " + minTempTwo.toFixed(2) + "°C"));
+    resultTwo.append($("<h4>").text("Max: " + maxTempTwo.toFixed(2) + "°C"));
+
+    let resultThree = $("<div>");
+    resultThree.attr("class", "col-3 forecast-day flex");
+    let iconThree = $("<img>").attr(
+      "src",
+      "http://openweathermap.org/img/wn/" +
+        response.list[22].weather[0].icon +
+        "@2x.png"
+    );
+    let dayThreeTemps = temps.slice(16, 24);
+    let minTempThree = Math.min(...dayThreeTemps) - 273.15;
+    let maxTempThree = Math.max(...dayThreeTemps) - 273.15;
+    if (today.getDay() <= 4) {
+      resultThree.append($("<h4>").text(days[today.getDay() + 2]));
+    } else {
+      resultThree.append($("<h4>").text(days[today.getDay() - 5]));
+    }
+    resultThree.append(iconThree);
+    resultThree.append(
+      $("<h4>").text("Min: " + minTempThree.toFixed(2) + "°C")
+    );
+    resultThree.append(
+      $("<h4>").text("Max: " + maxTempThree.toFixed(2) + "°C")
+    );
+
+    let resultFour = $("<div>");
+    resultFour.attr("class", "col-3 forecast-day flex");
+    let iconFour = $("<img>").attr(
+      "src",
+      "http://openweathermap.org/img/wn/" +
+        response.list[28].weather[0].icon +
+        "@2x.png"
+    );
+    let dayFourTemps = temps.slice(24, 32);
+    let minTempFour = Math.min(...dayFourTemps) - 273.15;
+    let maxTempFour = Math.max(...dayFourTemps) - 273.15;
+    if (today.getDay() <= 3) {
+      resultFour.append($("<h4>").text(days[today.getDay() + 3]));
+    } else {
+      resultFour.append($("<h4>").text(days[today.getDay() - 4]));
+    }
+    resultFour.append(iconFour);
+    resultFour.append($("<h4>").text("Min: " + minTempFour.toFixed(2) + "°C"));
+    resultFour.append($("<h4>").text("Max: " + maxTempFour.toFixed(2) + "°C"));
+
+    let resultFive = $("<div>");
+    resultFive.attr("class", "col-3 forecast-day flex");
+    let iconFive = $("<img>").attr(
+      "src",
+      "http://openweathermap.org/img/wn/" +
+        response.list[36].weather[0].icon +
+        "@2x.png"
+    );
+    let dayFiveTemps = temps.slice(32, 39);
+    let minTempFive = Math.min(...dayFiveTemps) - 273.15;
+    let maxTempFive = Math.max(...dayFiveTemps) - 273.15;
+    if (today.getDay() <= 2) {
+      resultFive.append($("<h4>").text(days[today.getDay() + 4]));
+    } else {
+      resultFive.append($("<h4>").text(days[today.getDay() - 3]));
+    }
+    resultFive.append(iconFive);
+    resultFive.append($("<h4>").text("Min: " + minTempFive.toFixed(2) + "°C"));
+    resultFive.append($("<h4>").text("Max: " + maxTempFive.toFixed(2) + "°C"));
+
+    $("#forecastBlock").append(resultTwo);
+    $("#forecastBlock").append(resultThree);
+    $("#forecastBlock").append(resultFour);
+    $("#forecastBlock").append(resultFive);
 
     appendHistory();
     function appendHistory() {
@@ -120,7 +222,6 @@ function itemSearch(queryString) {
       lastSearchLon = response.city.coord.lon;
     }
     UVSearch(queryStringUV(lastSearchLat, lastSearchLon));
-    console.log(queryStringUV(lastSearchLat, lastSearchLon));
     renderHistory();
   });
 }
@@ -149,12 +250,18 @@ function displaySearchHistory() {
   if (searchHistoryList !== []) {
     searchHistory = searchHistoryList;
   }
+  let lastSearchHistory = JSON.parse(localStorage.getItem("last-search"));
+  if (lastSearchHistory !== []) {
+    lastSearch = lastSearchHistory;
+    itemSearch(queryString(lastSearch));
+  }
   renderHistory();
 }
 displaySearchHistory();
 
 function storeHistory() {
   localStorage.setItem("search-history", JSON.stringify(searchHistory));
+  localStorage.setItem("last-search", JSON.stringify(lastSearch));
 }
 
 function queryString(queryParameter) {

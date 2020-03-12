@@ -16,11 +16,10 @@
   margin-top: 10px;
   width: 80%;
 }
-/* 
-#search-form,
-#forecastBlock {
+
+.forecast-day {
+  float: left;
   border-style: solid;
-  border-radius: 0.5em;
-  padding: 10px;
-  margin: 1px;
-} */
+  border-radius: 5px;
+  border-color: black;
+}
