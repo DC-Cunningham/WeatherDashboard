@@ -1,4 +1,3 @@
-debugger;
 var searchHistory = [];
 var lastSearch = [];
 var lastSearchLat;
