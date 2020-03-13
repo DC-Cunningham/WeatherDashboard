@@ -178,7 +178,7 @@ function itemSearch(queryString) {
     $("#currentBlock").append(resultOne);
 
     let resultTwo = $("<div>");
-    resultTwo.attr("class", "col-3 forecast-day flex");
+    resultTwo.attr("class", "col-md-3 forecast-day flex");
     let iconTwo = $("<img>").attr(
       "src",
       "https://openweathermap.org/img/wn/" +
@@ -198,7 +198,7 @@ function itemSearch(queryString) {
     resultTwo.append($("<h4>").text("Max: " + maxTempTwo.toFixed(2) + "°C"));
 
     let resultThree = $("<div>");
-    resultThree.attr("class", "col-3 forecast-day flex");
+    resultThree.attr("class", "col-md-3 forecast-day flex");
     let iconThree = $("<img>").attr(
       "src",
       "https://openweathermap.org/img/wn/" +
@@ -222,7 +222,7 @@ function itemSearch(queryString) {
     );
 
     let resultFour = $("<div>");
-    resultFour.attr("class", "col-3 forecast-day flex");
+    resultFour.attr("class", "col-md-3 forecast-day flex");
     let iconFour = $("<img>").attr(
       "src",
       "https://openweathermap.org/img/wn/" +
@@ -242,7 +242,7 @@ function itemSearch(queryString) {
     resultFour.append($("<h4>").text("Max: " + maxTempFour.toFixed(2) + "°C"));
 
     let resultFive = $("<div>");
-    resultFive.attr("class", "col-3 forecast-day flex");
+    resultFive.attr("class", "col-md-3 forecast-day flex");
     let iconFive = $("<img>").attr(
       "src",
       "https://openweathermap.org/img/wn/" +
