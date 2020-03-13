@@ -18,29 +18,34 @@
         <h1 class="display-4">Weather Dashboard</h1>
         <p class="lead">Find out what the weather is going to be all around the world!</p> 
     </div>
+    <div class="container">
       <div class="row">
-        <div class="col-4" id="search-form">
-          <form class="row">
-            <div class="col-12 form-group">
-                <input type="text" class="form-control" id="searchFormInput" placeholder="Search for a city's weather">
+        <div class="col-md-4">
+          <div id="search-form">
+            <div class="col-12 form-group" >
+                <label class="text-center">Search for a city's weather</label>
+                <input type="text" class="form-control" id="searchFormInput">
             </div>
-            <button type="submit" class="btn btn-primary btn-block" id="searchButton">Search</button>
+            <button type="submit" class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="bottom" title="This is the title" id="searchButton">Search</button>
               <p class="col-10" id="note">Note: To make a more precise search put the city's name, then a comma, and then a 2-letter country code <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="blank">ISO3166</a>. You will get all cities in the chosen country.
                 The order is important - first the city name, and then a comma, then the country letters. Example - London, GB or New York, US.</p>
-          </form>
-        <div class="row">
-          <h2 class="col-12 text-center">Search History:</h2>
-            <div class="col-12" id="search-history">
-            </div>
-            <button class="btn btn-outline-danger btn-block" id="clear-history">clear history</button>
+              </div>
+        </div>
+        <div class="col-md-8">
+          <div class="text-center" id= "currentBlock"></div> 
+        </div> 
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+        <div id="search-history-block">
+            <h2 class="col-12 text-center">Search History:</h2>
+            <div id="search-history"></div>
+            <button class=" col-12 btn btn-danger btn-block" id="clear-history">clear history</button>
         </div>
       </div>
-      <div class="col-8">
-        <div class="row">
-          <div class="col-12 block text-center" id= "currentBlock">
-          </div>  
-        <div class="row">
-          <div class="col block text-center" id= "forecastBlock"> 
+        <div class="col-md-8" id= "forecast-block"> 
+          <div class="col-12">
+            <div class="text-center" id="forecastBlock"></div>
           </div>
         </div>
       </div>

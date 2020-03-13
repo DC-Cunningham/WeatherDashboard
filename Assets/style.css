@@ -1,6 +1,15 @@
 .jumbotron {
+  text-align: center;
+  margin: 20px;
   margin-bottom: 0em;
-  padding-bottom: 0em;
+  padding-bottom: 10px;
+  background-color: white;
+  opacity: 90%;
+}
+
+body {
+  background-image: url(../Assets/images/background.jpg);
+  background-size: cover;
 }
 
 #note {
@@ -9,30 +18,61 @@
   font-size: x-small;
 }
 
-.btn,
-#searchFormInput,
-#searchButton {
-  margin: 0 auto;
-  margin-top: 10px;
-  width: 80%;
-}
-
 .forecast-day {
   float: left;
   padding: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
   outline: 2px solid black;
   outline-style: groove;
   outline-offset: -10px;
+  background-color: white;
+  opacity: 90%;
+}
+
+#search-form {
+  height: 435px;
+}
+@media (max-width: 768px) {
+  #search-form {
+    height: 230px;
+  }
 }
 
 #currentBlock,
-#search-form {
-  min-height: 400px;
+#search-form,
+#search-history-block {
+  margin: 20px;
+  width: 100%;
   padding: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
   outline: 2px solid black;
   outline-style: groove;
   outline-offset: -10px;
-  /* border-style: solid;
-  border-radius: 5px;
-  border-color: black; */
+  background-color: white;
+  opacity: 90%;
+}
+
+#search-history-block {
+  margin: 0px 20px 20px 20px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
+  outline: 2px solid black;
+  outline-style: groove;
+  outline-offset: -10px;
+  background-color: white;
+  opacity: 90%;
+}
+
+#searchFormInput,
+#searchButton,
+#clear-history,
+.btn {
+  flex: inherit;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 80%;
 }

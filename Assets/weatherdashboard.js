@@ -72,7 +72,7 @@ function UVSearch(queryStringUV) {
     url: queryStringUV,
     method: "GET"
   }).then(function(response) {
-    let UVindex = $("<h4>").text("UV Index: " + response.value);
+    let UVindex = $("<h5>").text("UV Index: " + response.value);
     if (response.value > 7) {
       UVindex.attr("class", "bg-danger text-white");
     } else if (response.value > 2 && response.value < 7) {
@@ -146,8 +146,9 @@ function itemSearch(queryString) {
     let currentDayTemps = temps.slice(0, 8);
     let minTemp = Math.min(...currentDayTemps) - 273.15;
     let maxTemp = Math.max(...currentDayTemps) - 273.15;
+    resultOne.append(city);
     resultOne.append(
-      $("<h4>").text(
+      $("<h5>").text(
         days[today.getDay()] +
           " the " +
           dates[today.getDate()] +
@@ -155,23 +156,22 @@ function itemSearch(queryString) {
           months[today.getMonth()]
       )
     );
-    resultOne.append(city);
     resultOne.append(icon);
     resultOne.append(currentDescription);
     resultOne.append(
-      $("<h4>").text("Current Temperature: " + currentTemp.toFixed(2) + "°C")
+      $("<h5>").text("Current Temperature: " + currentTemp.toFixed(2) + "°C")
     );
     resultOne.append(
-      $("<h4>").text("Minimum Temperature: " + minTemp.toFixed(2) + "°C")
+      $("<h5>").text("Minimum Temperature: " + minTemp.toFixed(2) + "°C")
     );
     resultOne.append(
-      $("<h4>").text("Maximum Temperature: " + maxTemp.toFixed(2) + "°C")
+      $("<h5>").text("Maximum Temperature: " + maxTemp.toFixed(2) + "°C")
     );
     resultOne.append(
-      $("<h4>").text("Current Humidity: " + currentHumidity + "%")
+      $("<h5>").text("Current Humidity: " + currentHumidity + "%")
     );
     resultOne.append(
-      $("<h4>").text(
+      $("<h5>").text(
         "Current Windspeed: " + currentWindSpeed.toFixed(2) + "km/h"
       )
     );
